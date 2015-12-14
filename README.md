@@ -17,5 +17,5 @@ This web application makes use of the Echo Nest API to retrieve music informatio
 
 Online at
 
-[http://itsrainingbits.com](http://itsrainingbits.com)
+[http://www.itsrainingbits.com](http://www.itsrainingbits.com)
 
