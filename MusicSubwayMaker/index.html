@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+	
+<html lang="en" style="height: 95%; width:98%;">
+	
+	<head>
+	
+		<title>Automated Music Subway Maker</title>
+	
+		<meta charset="utf-8">
+			
+		<link rel="stylesheet" type="text/css" href="Styles/styles.css" />
+		<link rel="stylesheet" type="text/css" href="Libs/Hover/demo-page.css" media="all">
+		<link rel="stylesheet" type="text/css" href="Libs/Hover/hover.css" media="all">
+		<link rel="stylesheet" type="text/css" href="Libs/ContextMenu/ContextMenu.css">
+		<link rel="stylesheet" type="text/css" href="Libs/JQuery/jquery-ui.css" type="text/css" media="all"> 					
+		<link rel="stylesheet" type="text/css" href="Libs/AnimatedAlerts/demo.css" type="text/css" media="screen">
+		<link rel="stylesheet" type="text/css" href="Libs/bootstrap-3.3.6-dist/css/bootstrap.min.css">
+							
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>		
+		<script type="text/javascript" src="Libs/rwdImageMaps/jquery.rwdImageMaps.min.js"></script>
+		<script type="text/javascript" src="Libs/rwdImageMaps/jquery.rwdImageMaps.js"></script>
+		<script type="text/javascript" src="Libs/JQuery/jquery.js"></script>
+		<script type="text/javascript" src="Libs/JQuery/jquery_002.js"></script>
+    	<script type="text/javascript" src="Libs/JQuery/jquery-ui.js" ></script>
+		<script type="text/javascript" src="Libs/ContextMenu/ContextMenu.js"></script>
+		<script type="text/javascript" src="Libs/AnimatedAlerts/watch.js" async=""></script>			
+		<script type="text/javascript" src="Libs/AnimatedAlerts/animated_alert.js"></script>
+		<script type="text/javascript" src="Libs/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="Scripts/Common/Utils.js"></script>
+		<script type="text/javascript" src="Scripts/Common/Log.js"></script>
+		<script type="text/javascript" src="Scripts/Common/MLUndo.js"></script>			
+		<script type="text/javascript" src="Scripts/Map/MapStationsTable.js"></script>
+		<script type="text/javascript" src="Scripts/Map/MapStation.js"></script>
+		<script type="text/javascript" src="Scripts/Map/MapLoader.js"></script>
+		<script type="text/javascript" src="Scripts/Map/MapManager.js"></script>
+		<script type="text/javascript" src="Scripts/Spotify/Spotify.js"></script>		
+		<script type="text/javascript" src="Scripts/Dashboard/Dashboard.js"></script>
+		<script type="text/javascript" src="Scripts/Dashboard/Help.js"></script>		
+		<script type="text/javascript" src="Scripts/Dashboard/Back.js"></script>	
+		<script type="text/javascript" src="Scripts/Dashboard/Clear.js"></script>	
+		<script type="text/javascript" src="Scripts/Dashboard/Export.js"></script>	
+		<script type="text/javascript" src="Scripts/Dashboard/GoMagic.js"></script>
+		<script type="text/javascript" src="Scripts/Dashboard/Cover.js"></script>	
+		<script type="text/javascript" src="Scripts/Dashboard/Player.js"></script>	
+
+		<script type="text/javascript" src="Scripts/_Main.js"></script>
+	
+	</head>
+				
+				
+	<body>
+
+		<div id="header" >
+			<header>Automated Music Subway Maker</header>
+		</div>
+
+		<div id="help">
+			<a id="helptxt" title="Click To Know More!" >... What's This?</a>
+		</div>
+		
+		<div id="magicfillbutton" >
+			<input id="magicfill" type="button" value="GO MAGIC" title="Fill The Map Magically!" />
+		</div>
+
+		<div id="backbutton" >	
+			<input id="back" type="button" class="hvr-fade" value="Back" title="Cancel Last Edit"/>
+		</div>
+		
+		<div id="clearbutton" >
+			<input id="clear" type="button" class="hvr-fade" value="Clear" title="Clear The Map"/>	
+		</div>
+
+		<div id="exportbutton" >	
+			<input id="export" type="button" class="hvr-fade" value="Export" title="Save The Map In A File"/>
+		</div>
+
+		<div id="coverpane" >		
+			<a id="coverlink" href='' >   		
+				<img id="cover" />
+			</a>
+		</div>
+
+		<div id="player" >		
+		</div>
+	
+		<div id="subwaypane" >
+			<img id="subwayim" src="Resources/SubwayMap.png" usemap="#map" > 
+				<map name="map">
+				</map>				
+		</div>				
+					
+		<div id="footer"> 
+			Programmed by <a href="mailto:shaadylaane@gmail.com" title="Write Me :)" >It's Raining Bits</a>  &diams;  Powered by <a href="http://the.echonest.com">The Echo Nest</a> and <a href="http://spotify.com">Spotify</a>
+		</div>
+				
+
+		<div id="aw_popup_alert" class="aw_popup" data-show-effect="jumpIn" data-hide-effect="zoomOut">
+			<div class="aw_popup_layout animated">
+				<div class="material_alert material_alert_success" role="alert">
+					<div id="aw_popup_text">
+					</div>	
+					<span class="aw_close_icon aw_close">+</span>
+				</div>				
+			</div>
+		</div>		
+
+	</body>
+	
+</html>
+
+
+
