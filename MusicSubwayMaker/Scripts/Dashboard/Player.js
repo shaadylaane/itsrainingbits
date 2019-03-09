@@ -32,11 +32,11 @@ Dashboard.Player = (function ( ) {
             if ( !data )
                 return 1;   
 
-            if (! ('songs' in data.response)) {
+            if (! ('tracks' in data)) {
                 err = 1;
             } else {
 
-                inPlaylist = data.response.songs;
+                inPlaylist = data.tracks;
                 link = newlink;
                 _addSpotifyInfoToPlaylist();
                 if ( playNow )

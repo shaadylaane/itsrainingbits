@@ -104,10 +104,10 @@ var stationTable = [
  */
 var initTable = [ 
     { stationIdx: 2,  artist: "Autechre",                focus: 0 },
-    { stationIdx: 12, artist: "Beach House",             focus: 1 },
-    { stationIdx: 21, artist: "Wolgang Amadeus Mozart",  focus: 0 },    
+    { stationIdx: 12, artist: "Beach House",             focus: 0 },
+    { stationIdx: 21, artist: "Frédéric Chopin",         focus: 0 },    
     { stationIdx: 26, artist: "Céline Dion",             focus: 0 },
-    { stationIdx: 36, artist: "Radiohead",               focus: 0 },
+    { stationIdx: 36, artist: "Radiohead",               focus: 1 },
     { stationIdx: 43, artist: "Sufjan Stevens",          focus: 0 }
     
 ];

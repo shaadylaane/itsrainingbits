@@ -332,44 +332,33 @@ var MapManager = (function ( ) {
         var artist = listStations[line.stationIdxArray[lineSegmentDesc.seedIdx]].inittxt;
         console.log('searching for', artist);
         var ardata = Spotify.getArtist(artist);
-        if (ardata && ardata.response.status.code == 0 && ardata.response.artists.length > 0)
+        if (ardata && ardata.artists.items.length > 0)
         {
             /* The seed artist has been recognized by spotify. Get some images */
-            var seed = ardata.response.artists[0];      
-            var imdata = Spotify.getImages( [seed] );
-            if( imdata )
-            {               
-                var sdata = Spotify.getSimilarArtists( imdata[0]);
-                if( sdata )
-                {
-                    /* Even better, similar artists have been suggested by Spotify.
-                    Grab some images for each of them. */
-                    var simdata = Spotify.getImages(sdata);
-                    if( simdata )
-                    {
-                        /* Dispatch the similar artists through the line segment,
-                        namely to all empty stations connex to the seed */
-                    
-                        /* But can we really take the first similar artist and store it
-                        to the next connex station found, without first considering if
-                        it fits in size into the station text box? Nope...
-                        Better first create an array of all those stations connex
-                        to the seed station, sorted by increasing text input box size */
-                        var sortArray = _createSzSortArray( line, lineSegmentDesc );
-        
-                        //ctrcol++;
-        
-                        /* Fill each connex station, from the smallest to the biggest box.
-                        For each station, the first similar artist found which fits into
-                        the text input box will be selected */
-                        for ( var i = 0; i < sortArray.length; i++ )    
-                            _fillStationWithBestCandidate( line, sortArray[i], simdata );               
+            var sdata = Spotify.getSimilarArtists( ardata.artists.items[0] );
+			if( sdata )
+            {
+				/* Dispatch the similar artists through the line segment,
+				namely to all empty stations connex to the seed */
+			
+				/* But can we really take the first similar artist and store it
+				to the next connex station found, without first considering if
+				it fits in size into the station text box? Nope...
+				Better first create an array of all those stations connex
+				to the seed station, sorted by increasing text input box size */
+				var sortArray = _createSzSortArray( line, lineSegmentDesc );
+
+				//ctrcol++;
+
+				/* Fill each connex station, from the smallest to the biggest box.
+				For each station, the first similar artist found which fits into
+				the text input box will be selected */					
+				for ( var i = 0; i < sortArray.length; i++ )    
+					_fillStationWithBestCandidate( line, sortArray[i], sdata.artists );               
                         
-                    }
-                }                       
-            }               
+            }                                    
         } else {
-            //info("Can't find that artist");
+            info("Can't find that artist");
         }
 
     }
@@ -470,7 +459,7 @@ var MapManager = (function ( ) {
             }
         
             /* fill the next similar artist found downwards */              
-            if ( dCtr <= candidates.length )
+            if ( dCtr < candidates.length )
             {
                 if( Utils.getWidthOfText(candidates[dCtr].name) <=  station.inputSize
                 && !_alreadyExistsInMap( candidates[dCtr].name ) )
@@ -494,9 +483,8 @@ var MapManager = (function ( ) {
 
         if ( station.input.value.length == 0 )
         {
-            if ( similar.spotifyArtistInfo.images.length > 0 ) 
-                station.coverURL = similar.spotifyArtistInfo.images[0].url;
-            station.link = similar.spotifyArtistInfo.external_urls.spotify;
+            station.coverURL = similar.uri;
+            station.link = similar.href;
     
             station.fill( similar.name, station.coverURL, station.link, 0 /* don't show cover */  );
 

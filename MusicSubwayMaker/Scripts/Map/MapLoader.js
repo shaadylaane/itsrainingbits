@@ -25,12 +25,10 @@ var MapLoader = (function ( ) {
         var listStations = _loadListStations( stationTable );
         var listLines = _loadListLines( listStations );
 
-        //deleteAllCookies();
-
         /* Restore old session from the cookies.
         If the page is loaded for the first time (no cookies),
         then fill the map with the init stations */
-        if ( _restoreStations( listStations ) <= 1 && initTable )
+        if ( /*_restoreStations( listStations ) <= 1 && */initTable )            /// To uncomment when using cookies!!!
             _loadInitStations( listStations, initTable );
         
         return {
@@ -147,7 +145,7 @@ var MapLoader = (function ( ) {
         var nbEntries = 0;
 
         /* Browse each cookie entry */
-        for(var cookIdx = 0; cookIdx <cookiearray.length-1; cookIdx++)
+        for( var cookIdx = 0; cookIdx <cookiearray.length-1; cookIdx++)
         {
             /* Parse the cookie entry */
             var id = cookiearray[cookIdx].split('=')[0].trim();
@@ -190,18 +188,6 @@ var MapLoader = (function ( ) {
         }   
     
     }
-    
-    
-    
-    /*var deleteAllCookies = function ( ) {
-    
-        var c = document.cookie.split("; ");
-            for (i in c) 
-                document.cookie =/^[^=]+/.exec(c[i])[0]+"=;expires=Thu, 01 Jan 1970 00:00:00 GMT";    
-    }*/
-             		
-    
-
                 
     return {
         MAX_STATIONS_PER_LINE: MAX_STATIONS_PER_LINE,

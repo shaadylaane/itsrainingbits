@@ -11,8 +11,7 @@
 Dashboard.GoMagic = (function ( ) {
 
     var button;
-        
-        
+                    
     /*
      * Init the event handler.
      */ 
@@ -21,6 +20,7 @@ Dashboard.GoMagic = (function ( ) {
 
         button = document.getElementById("magicfill");
         button.onclick = function () {
+            
             MapManager.fill(); /* No Argument => Fill all lines! */
         };              
 

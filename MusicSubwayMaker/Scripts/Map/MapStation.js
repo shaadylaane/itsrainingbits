@@ -148,16 +148,13 @@ MapStation.prototype.createInput = function ( txtpos, txtalign, width )
             var data = Spotify.getArtist( artist );
             if( data )
             {                   
-                if (data.response.status.code == 0 && data.response.artists.length > 0)
+                if (data.artists.items.length > 0)
                 {
-                    name = data.response.artists[0].name;
-                    var imdata = Spotify.getImage( data.response.artists[0]);
-                    if( imdata)
-                    { 
-                        station.fill( name, imdata.images[0].url, imdata.external_urls.spotify, focus );
-                        if( focus )
-                            station.setupPlayer( false /*don't play immediately...*/); 
-                    }               
+                    name = data.artists.items[0].name;
+					station.fill( name, data.artists.items[0].images[0].url, data.artists.items[0].external_urls.spotify, focus );
+					if( focus )
+						station.setupPlayer( false /*don't play immediately...*/); 
+             
                 } else
                     station.fill( artist, null, null, focus );          
             }       
@@ -245,7 +242,7 @@ MapStation.prototype.createArea = function ( pos, input ) {
         {
             stationCtxMenu.addItem("fill",   "Fill This Line", function() { MapManager.fillThisLine( station ); } );
             stationCtxMenu.addItem("clear",   "Clear This Line", function() { MapManager.clearThisLine( station ); } );
-            stationCtxMenu.addItem("info",    "Get Artist Biography", function() { station.showArtistBio(); });
+            //stationCtxMenu.addItem("info",    "Get Artist Biography", function() { station.showArtistBio(); });
             stationCtxMenu.addItem("quickplay",    "Quick Play!", function() { station.quickPlay( ); });
             stationCtxMenu.addItem("spotifyplay",    "Play In Spotify", function() { station.playInSpotify(); });
 
@@ -359,7 +356,7 @@ MapStation.prototype.save = function ( ) {
 /*
  *  Popup the station's artist biography.
  */     
-
+/*
 MapStation.prototype.showArtistBio = function ( )  {
 
     var bioTxt = "";
@@ -412,7 +409,7 @@ MapStation.prototype.showArtistBio = function ( )  {
         Log.popupError("No Biography found :(");    
 
 }
-
+*/
 
 
 /*

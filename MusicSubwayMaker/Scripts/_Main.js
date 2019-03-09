@@ -10,14 +10,17 @@
  
 $(document).ready(function() {
 
+    
     /* Set ajax the global settings */ 
     $.ajaxSetup({
         async: false /* all calls shall be synchronous */
     });
     jQuery.ajaxSettings.traditional = true; 
-        
+            
     /* Init Log module */
     Log.init();
+
+    Spotify.authorize();
 
     /* Init Dashboard */
     Dashboard.init();
@@ -26,4 +29,4 @@ $(document).ready(function() {
     MapManager.init( stationTable, initTable ); 
 
 
-});
+});            
