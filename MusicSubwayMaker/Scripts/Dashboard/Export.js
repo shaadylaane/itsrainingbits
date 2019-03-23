@@ -7,6 +7,7 @@
  * Licensed under the MIT license
  */
  
+
  
 Dashboard.Export = (function ( ) {
             
@@ -26,7 +27,9 @@ Dashboard.Export = (function ( ) {
     var _export = function ( )
     {       
         $( "#subwaypane" ).css( "border-style", "none" );
+        
         html2canvas($("#subwaypane"), {
+            scale: 4,
             onrendered: function(canvas) {
                 canvas.toBlob(function(blob) {
                     saveAs(blob, "YourSubway.png" ); 
@@ -34,6 +37,7 @@ Dashboard.Export = (function ( ) {
                 $( "#subwaypane" ).css( "border-style", "groove" );
             }
         });
+                
     }   
     
     return {

@@ -11,14 +11,7 @@
 var Spotify = (function () {
 
     var accessToken;
-
-    var config = {
-        apiKey: "BDBD83XGRIXVTMYJB",
-        spotifySpace: "spotify",
-        //echoNestHost: "http://developer.echonest.com/",
-        spotifyHost: "https://api.spotify.com/"
-    };
-       
+    var spotifyHost= "https://api.spotify.com/";
 	   
     var authorize = function ( ) {   
 
@@ -36,7 +29,6 @@ var Spotify = (function () {
         window.location.hash = '';
 
         // Set token
-        //let _token = hash.access_token;
         accessToken = hash.access_token;
 
         const authEndpoint = 'https://accounts.spotify.com/authorize';
@@ -54,8 +46,14 @@ var Spotify = (function () {
         if (!accessToken) {
           window.location = `${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join('%20')}&response_type=token&show_dialog=true`;
         }
+        
+        return (accessToken != null);
     }
-
+    
+    
+    var setRequestHeader = function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+    }
     
     
     var autoComplete = function(input, truncWidth) {
@@ -66,7 +64,7 @@ var Spotify = (function () {
 
 			    $.ajax({
 					type: "GET",
-					url: config.spotifyHost + "v1/search",
+					url: spotifyHost + "v1/search",
 					dataType: "json",
 					data: {
 						type: "artist",
@@ -75,6 +73,7 @@ var Spotify = (function () {
 						format: "json",
 						q: request.term
 					},
+                    beforeSend: setRequestHeader,
                     success: function( data ) {                 
                         response( $.map( Utils.truncateArray(Utils.truncateEntries(data.artists.items, truncWidth), 12), function(item) {
                             return {
@@ -99,14 +98,17 @@ var Spotify = (function () {
     var getSimilarArtists = function ( artist )
     {
         var rdata = null;
-        var url = config.spotifyHost + 'v1/artists/' + artist.id +'/related-artists';
-
-        $.getJSON(url) 
-            .done(function(data) {
-                    rdata = data;
-            });
         
-            return rdata;
+        $.ajax({
+           url: spotifyHost + 'v1/artists/'+ artist.id +'/related-artists',
+           type: "GET",
+           beforeSend: setRequestHeader,
+           success: function(data) { 
+             rdata = data;
+           }
+        });
+        
+        return rdata;
     }
 
 
@@ -115,9 +117,14 @@ var Spotify = (function () {
         var rdata = null;
         
         $.ajax({
-           url: config.spotifyHost + 'v1/search?q='+ encodeURIComponent(name.trim()) +'&type=artist',
+            url: spotifyHost + 'v1/search',
+            dataType: "json",
+            data: {
+                type: "artist",
+                q: name
+            },            
            type: "GET",
-           beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);},
+           beforeSend: setRequestHeader,
            success: function(data) { 
              rdata = data;
            }
@@ -127,46 +134,32 @@ var Spotify = (function () {
     }
 
     
-	//Biography not supported by Spotify API, what a real pity...
-/*     var getArtistBio = function( name ) {
-
-        var rdata = null;
-        var url = config.echoNestHost + 'api/v4/artist/biographies';
-
-        $.getJSON(url, {
-                'api_key': config.apiKey,
-                'name' : name,
-              }) 
-            .done(function(data) {
-                rdata = data;
-            });
-        
-        return rdata;        
-
-    }    */  
-    
     var getArtistPlaylist = function( artist ) {
     
         var rdata = null;
-        var art = getArtist(artist);        
-        var url = config.spotifyHost + 'v1/artists/' + art.artists.items[0].id + '/top-tracks';
+        var art = getArtist(artist);      
+        var id = art.artists.items[0].id;
         
-        $.getJSON(url, { 
-                'country': 'SE',
-                }) 
-            .done(function(data) {
-                rdata = data;
-            });
-            
+        $.ajax({
+           url: spotifyHost + 'v1/artists/' + id + '/top-tracks',
+           dataType: "json",
+           data: {
+                country: "SE"
+           },            
+           type: "GET",
+           beforeSend: setRequestHeader,
+           success: function(data) { 
+             rdata = data;
+           }
+        });
+                
         return rdata;
     }
 	
     
     var getSongs = function( songs ) {
-    
-    
+        
         var rdata = null;
-        var url = config.spotifyHost + 'v1/tracks/';
     
         var tids = [];
         songs.forEach(function(song) {
@@ -174,11 +167,19 @@ var Spotify = (function () {
             tids.push(tid);
         }); 
         
-        $.getJSON( url, { 'ids': tids.join(',')}) 
-            .done(function(data) {
-                rdata = data;
-            });
-
+        $.ajax({
+           url: spotifyHost + 'v1/tracks/',
+           dataType: "json",
+           data: {
+                ids: tids.join(',')
+           },                 
+           type: "GET",
+           beforeSend: setRequestHeader,
+           success: function(data) { 
+             rdata = data;
+           }
+        });        
+        
         return rdata;
     
     }

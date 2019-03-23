@@ -28,7 +28,7 @@ var MapLoader = (function ( ) {
         /* Restore old session from the cookies.
         If the page is loaded for the first time (no cookies),
         then fill the map with the init stations */
-        if ( /*_restoreStations( listStations ) <= 1 && */initTable )            /// To uncomment when using cookies!!!
+        if ( _restoreStations( listStations ) <= 1 && initTable )            /// To uncomment when using cookies!!!
             _loadInitStations( listStations, initTable );
         
         return {

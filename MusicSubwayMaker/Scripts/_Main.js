@@ -20,13 +20,14 @@ $(document).ready(function() {
     /* Init Log module */
     Log.init();
 
-    Spotify.authorize();
+    if(Spotify.authorize()) {    
 
-    /* Init Dashboard */
-    Dashboard.init();
-            
-    /* Finally init the map from the table of stations defined in StationTables.js */
-    MapManager.init( stationTable, initTable ); 
+        /* Init Dashboard */
+        Dashboard.init();
 
+        /* Finally init the map from the table of stations defined in StationTables.js */
+        MapManager.init( stationTable, initTable ); 
+
+    }
 
 });            

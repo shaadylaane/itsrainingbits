@@ -25,6 +25,9 @@ function MapStation ( tabStation )
     /* Array of lines crossing the station */
     station.lineArray = tabStation.lineArray;
     
+    /*Type of hub*/
+    station.hubType = tabStation.hubType;
+    
     /* Text input element associated to the station */
     station.input = station.createInput( tabStation.txtpos, tabStation.txtalign, tabStation.width );
 
@@ -165,14 +168,6 @@ MapStation.prototype.createInput = function ( txtpos, txtalign, width )
         }
     }
 
-    
-    /* Set ID, type, class and style */
-    input.id = "input_" + station.id; 
-    input.type = "text";
-    input.className = "stationinput"; 
-    $( "#"+ input.id ).css( "text-align", txtalign );   
-
-
     /* Init some custom settings */
     input.leftprct = txtpos[0];
     input.topprct = txtpos[1];
@@ -181,6 +176,24 @@ MapStation.prototype.createInput = function ( txtpos, txtalign, width )
     input.fontsizeprct = 1.5;
     input.inittxt = input.value = "";
     
+    /* Set ID, type, class and style */
+    input.id = "input_" + station.id; 
+    input.type = "text";
+    input.className = "stationinput"; 
+    $( "#"+ input.id ).css( "text-align", txtalign );
+    
+    if(this.hubType == 'Minor')
+    {
+        $( "#"+ input.id ).css( "font-weight", "bold" );
+        input.heightprct *= 1.1;        
+        input.fontsizeprct *= 1.1;        
+    } else if(this.hubType == 'Major')
+    {
+        $( "#"+ input.id ).css( "font-weight", "bold" );
+        input.heightprct *= 1.3;        
+        input.fontsizeprct *= 1.3;  
+    }
+        
     /* Resize the input to the map */
     input.resize( document.getElementById("subwayim") );
     

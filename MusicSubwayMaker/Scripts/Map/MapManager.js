@@ -483,7 +483,7 @@ var MapManager = (function ( ) {
 
         if ( station.input.value.length == 0 )
         {
-            station.coverURL = similar.uri;
+            station.coverURL = similar.images[0].url;
             station.link = similar.href;
     
             station.fill( similar.name, station.coverURL, station.link, 0 /* don't show cover */  );
