@@ -29,7 +29,7 @@ Dashboard.Export = (function ( ) {
         $( "#subwaypane" ).css( "border-style", "none" );
         
         html2canvas($("#subwaypane"), {
-            scale: 4,
+            scale: 6,
             onrendered: function(canvas) {
                 canvas.toBlob(function(blob) {
                     saveAs(blob, "YourSubway.png" ); 

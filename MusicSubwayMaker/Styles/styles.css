@@ -150,7 +150,7 @@ header {
 #footer {
     position: absolute;
     top:98%;
-    margin-left: 40%;
+    margin-left: 50%;
     font-size:1.3vw;
     font-size:1.3vh;
     font-family:'Fjalla One', sans-serif;    
@@ -161,7 +161,7 @@ header {
     position: absolute;
     z-index: 2;
     border: none;  
-    border-radius: 20px;   
+    border-radius: 5px;   
     box-shadow: 1px 1px 2px #888888;
     background: transparent;
     box-shadow: none;         

@@ -361,7 +361,8 @@ MapStation.prototype.fill = function ( name, coverURL, link, showCover ) {
 
 MapStation.prototype.save = function ( ) {
 
-    document.cookie = this.id + "=" + this.input.value + "," + this.coverURL + "," + this.link +";";
+    if (Utils.useCookies)
+        document.cookie = this.id + "=" + this.input.value + "," + this.coverURL + "," + this.link +";";
 }
 
 

@@ -113,6 +113,10 @@ var Utils = (function ( ) {
         },
 
 
+        useCookies: function ( ) {                
+            return true;
+        },    
+
                 
 
     };
